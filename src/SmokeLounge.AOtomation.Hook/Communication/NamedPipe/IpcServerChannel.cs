@@ -42,8 +42,7 @@ namespace SmokeLounge.AOtomation.Hook.Communication.NamedPipe
 
         public IpcServerChannel(string channelName)
         {
-            Contract.Requires<ArgumentNullException>(channelName != null);
-            Contract.Requires<ArgumentException>(channelName != string.Empty);
+            Contract.Requires<ArgumentException>(string.IsNullOrWhiteSpace(channelName) == false);
 
             this.channelName = channelName;
 
@@ -201,8 +200,7 @@ namespace SmokeLounge.AOtomation.Hook.Communication.NamedPipe
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
-            Contract.Invariant(this.channelName != null);
-            Contract.Invariant(this.channelName != string.Empty);
+            Contract.Invariant(string.IsNullOrWhiteSpace(this.channelName) == false);
             Contract.Invariant(this.inBufferSize >= 0);
             Contract.Invariant(this.outBufferSize >= 0);
         }

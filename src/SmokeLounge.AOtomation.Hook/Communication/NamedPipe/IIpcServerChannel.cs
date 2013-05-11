@@ -46,8 +46,7 @@ namespace SmokeLounge.AOtomation.Hook.Communication.NamedPipe
         {
             get
             {
-                Contract.Ensures(Contract.Result<string>() != null);
-                Contract.Ensures(Contract.Result<string>() != string.Empty);
+                Contract.Ensures(string.IsNullOrWhiteSpace(Contract.Result<string>()) == false);
 
                 throw new NotImplementedException();
             }

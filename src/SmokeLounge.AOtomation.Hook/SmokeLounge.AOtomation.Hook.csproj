@@ -126,10 +126,14 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="ClientConnection.cs" />
+    <Compile Include="ClientConnectionFactory.cs" />
     <Compile Include="Communication\NamedPipe\IpcServerChannelFactory.cs" />
     <Compile Include="Communication\NamedPipe\IIpcServerChannel.cs" />
     <Compile Include="Communication\NamedPipe\IpcServerChannel.cs" />
     <Compile Include="Communication\NamedPipe\IIpcServerChannelFactory.cs" />
+    <Compile Include="IClientConnection.cs" />
+    <Compile Include="IClientConnectionFactory.cs" />
     <Compile Include="IInjectLibrary.cs" />
     <Compile Include="IReadProcessMemory.cs" />
     <Compile Include="IWin32Module.cs" />

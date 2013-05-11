@@ -34,8 +34,7 @@ namespace SmokeLounge.AOtomation.Hook.Communication.NamedPipe
 
         public IIpcServerChannel Create(string channelName)
         {
-            Contract.Requires<ArgumentNullException>(channelName != null);
-            Contract.Requires<ArgumentException>(channelName != string.Empty);
+            Contract.Requires<ArgumentException>(string.IsNullOrWhiteSpace(channelName) == false);
             Contract.Ensures(Contract.Result<IIpcServerChannel>() != null);
 
             throw new NotImplementedException();

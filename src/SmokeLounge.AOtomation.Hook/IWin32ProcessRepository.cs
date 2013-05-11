@@ -37,6 +37,8 @@ namespace SmokeLounge.AOtomation.Hook
 
         public IWin32Process GetProcessById(int id)
         {
+            Contract.Ensures(Contract.Result<IWin32Process>() != null);
+
             throw new NotImplementedException();
         }
 
