@@ -187,7 +187,9 @@ namespace SmokeLounge.AOtomation.Hook.Communication.NamedPipe
 
                 if (this.PacketReceivedCallback != null)
                 {
-                    this.PacketReceivedCallback(message, resumeHookAction);
+                    var trim = new byte[messageWriteIndex];
+                    Array.Copy(message, trim, messageWriteIndex);
+                    this.PacketReceivedCallback(trim, resumeHookAction);
                 }
 
                 if (responseSent == false)
