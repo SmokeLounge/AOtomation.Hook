@@ -13,8 +13,8 @@ namespace Communication {
 using namespace AnarchyHook::Threading;
 
 IpcServer::IpcServer(string pipeName, ReceiveCallback receivedCallback) :
-    inBufferSize(1024),
-    outBufferSize(1024),
+    inBufferSize(2048),
+    outBufferSize(2048),
     pipeName(pipeName),
     pipeHandle(nullptr),
     receivedCallback(receivedCallback),

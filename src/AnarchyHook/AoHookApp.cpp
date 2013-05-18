@@ -58,10 +58,7 @@ void AoHookApp::OnConnectionSend(const void* connection, const unsigned int& siz
         return;
     }
 
-    unsigned char message[8] = {0};
-    memcpy_s(&message[0], 4, &packet, 4);
-    memcpy_s(&message[4], 4, &size, 4);
-    this->connectionSendClient->Send(&message, 8);
+    this->connectionSendClient->Send(packet, size);
 }
 
 void AoHookApp::OnDataBlockToMessage(const unsigned int& size, const void* dataBlock) {
@@ -69,10 +66,7 @@ void AoHookApp::OnDataBlockToMessage(const unsigned int& size, const void* dataB
         return;
     }
 
-    unsigned char message[8] = {0};
-    memcpy_s(&message[0], 4, &dataBlock, 4);
-    memcpy_s(&message[4], 4, &size, 4);
-    this->dataBlockToMessageClient->Send(&message, 8);
+	this->dataBlockToMessageClient->Send(dataBlock, size);
 }
 
 void AoHookApp::OnIpcMessageReceived(const char* message, const int& size) {

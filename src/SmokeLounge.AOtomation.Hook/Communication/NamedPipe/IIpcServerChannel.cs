@@ -24,7 +24,7 @@ namespace SmokeLounge.AOtomation.Hook.Communication.NamedPipe
 
         string Name { get; }
 
-        Action<byte[], int, Action> PacketReceivedCallback { get; set; }
+        Action<byte[], Action> PacketReceivedCallback { get; set; }
 
         #endregion
 
@@ -52,7 +52,7 @@ namespace SmokeLounge.AOtomation.Hook.Communication.NamedPipe
             }
         }
 
-        public Action<byte[], int, Action> PacketReceivedCallback
+        public Action<byte[], Action> PacketReceivedCallback
         {
             get
             {

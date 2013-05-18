@@ -46,8 +46,8 @@ namespace SmokeLounge.AOtomation.Hook.Communication.NamedPipe
 
             this.channelName = channelName;
 
-            this.inBufferSize = 8;
-            this.outBufferSize = 8;
+            this.inBufferSize = 2048;
+            this.outBufferSize = 2048;
         }
 
         #endregion
@@ -62,7 +62,7 @@ namespace SmokeLounge.AOtomation.Hook.Communication.NamedPipe
             }
         }
 
-        public Action<byte[], int, Action> PacketReceivedCallback { get; set; }
+        public Action<byte[], Action> PacketReceivedCallback { get; set; }
 
         #endregion
 
@@ -187,7 +187,7 @@ namespace SmokeLounge.AOtomation.Hook.Communication.NamedPipe
 
                 if (this.PacketReceivedCallback != null)
                 {
-                    this.PacketReceivedCallback(message, messageWriteIndex, resumeHookAction);
+                    this.PacketReceivedCallback(message, resumeHookAction);
                 }
 
                 if (responseSent == false)

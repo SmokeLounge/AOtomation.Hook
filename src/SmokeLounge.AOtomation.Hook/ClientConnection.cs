@@ -147,7 +147,7 @@ namespace SmokeLounge.AOtomation.Hook
             Contract.Invariant(this.readProcessMemory != null);
         }
 
-        private void OnReceivedCallback(byte[] buffer, int size, Action resumeHook)
+        private void OnReceivedCallback(byte[] buffer, Action resumeHook)
         {
             Contract.Assume(resumeHook != null);
             if (this.ReceiveCallback == null)
@@ -156,22 +156,10 @@ namespace SmokeLounge.AOtomation.Hook
                 return;
             }
 
-            if (buffer == null || buffer.Length < 8)
-            {
-                resumeHook();
-                return;
-            }
-
-            Contract.Assume(buffer.Length == 8);
-            var address = BitConverter.ToUInt32(buffer, 0);
-            var readSize = BitConverter.ToUInt32(buffer, 4);
-            Contract.Assume(readSize > 0);
-            var packet = this.readProcessMemory.Read(this.remoteProcessHandle, new IntPtr(address), (int)readSize);
-            Contract.Assume(this.ReceiveCallback != null);
-            this.ReceiveCallback(packet, resumeHook);
+            this.ReceiveCallback(buffer, resumeHook);
         }
 
-        private void OnSendCallback(byte[] buffer, int size, Action resumeHook)
+        private void OnSendCallback(byte[] buffer, Action resumeHook)
         {
             Contract.Assume(resumeHook != null);
             if (this.SendCallback == null)
@@ -180,18 +168,7 @@ namespace SmokeLounge.AOtomation.Hook
                 return;
             }
 
-            if (buffer == null || buffer.Length < 8)
-            {
-                resumeHook();
-                return;
-            }
-
-            Contract.Assume(buffer.Length == 8);
-            var address = BitConverter.ToUInt32(buffer, 0);
-            var readSize = BitConverter.ToUInt32(buffer, 4);
-            var packet = this.readProcessMemory.Read(this.remoteProcessHandle, new IntPtr(address), (int)readSize);
-            Contract.Assume(this.SendCallback != null);
-            this.SendCallback(packet, resumeHook);
+            this.SendCallback(buffer, resumeHook);
         }
 
         #endregion
