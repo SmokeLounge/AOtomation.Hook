@@ -20,7 +20,7 @@ namespace SmokeLounge.AOtomation.Hook
 
     using SmokeLounge.AOtomation.Hook.Kernel32;
 
-    public class RemoteMemory : SafeHandleZeroOrMinusOneIsInvalid
+    internal class RemoteMemory : CriticalHandleZeroOrMinusOneIsInvalid
     {
         #region Fields
 
@@ -33,7 +33,6 @@ namespace SmokeLounge.AOtomation.Hook
         #region Constructors and Destructors
 
         public RemoteMemory(IntPtr processHandle, int size)
-            : base(true)
         {
             this.processHandle = processHandle;
             this.size = size;

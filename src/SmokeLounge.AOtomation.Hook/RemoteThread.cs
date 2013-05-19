@@ -20,7 +20,7 @@ namespace SmokeLounge.AOtomation.Hook
 
     using SmokeLounge.AOtomation.Hook.Kernel32;
 
-    public class RemoteThread : SafeHandleZeroOrMinusOneIsInvalid
+    internal class RemoteThread : CriticalHandleZeroOrMinusOneIsInvalid
     {
         #region Fields
 
@@ -33,7 +33,6 @@ namespace SmokeLounge.AOtomation.Hook
         #region Constructors and Destructors
 
         public RemoteThread(IntPtr processHandle, IntPtr targetAddress)
-            : base(true)
         {
             this.processHandle = processHandle;
             this.targetAddress = targetAddress;
