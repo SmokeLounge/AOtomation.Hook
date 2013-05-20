@@ -46,8 +46,8 @@ namespace SmokeLounge.AOtomation.Hook.Communication.NamedPipe
 
             this.channelName = channelName;
 
-            this.inBufferSize = 2048;
-            this.outBufferSize = 2048;
+            this.inBufferSize = 16384;
+            this.outBufferSize = 16384;
         }
 
         #endregion
