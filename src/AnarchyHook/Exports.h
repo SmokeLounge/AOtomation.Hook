@@ -5,5 +5,3 @@
 #else
 #define ANARCHYHOOK_API __declspec(dllimport)
 #endif
-
-EXTERN_C ANARCHYHOOK_API VOID WINAPI Test();

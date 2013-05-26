@@ -70,7 +70,7 @@ void AoHookApp::OnDataBlockToMessage(const unsigned int& size, const void* dataB
 }
 
 void AoHookApp::OnIpcMessageReceived(const char* message, const int& size) {
-    string messageStr = string(message).substr(0, size);
+    string messageStr = string(message).substr(0, 4);
     if (messageStr == "hai!") {
         this->connectionSendClient->Connect();
         this->dataBlockToMessageClient->Connect();
