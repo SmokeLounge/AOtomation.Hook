@@ -15,6 +15,7 @@
 namespace SmokeLounge.AOtomation.Hook
 {
     using System;
+    using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.IO.Pipes;
 
@@ -119,11 +120,18 @@ namespace SmokeLounge.AOtomation.Hook
         {
             using (
                 var pipeClientStream = new NamedPipeClientStream(
-                    ".", this.hookServerChannelName, PipeDirection.Out, PipeOptions.WriteThrough))
+                    ".", this.hookServerChannelName, PipeDirection.Out, PipeOptions.None))
             {
                 pipeClientStream.Connect();
                 pipeClientStream.Write(message, 0, message.Length);
-                pipeClientStream.WaitForPipeDrain();
+                try
+                {
+                    pipeClientStream.WaitForPipeDrain();
+                }
+                catch
+                {
+                    Debug.WriteLine("pipe bandaid!");
+                }
             }
         }
 

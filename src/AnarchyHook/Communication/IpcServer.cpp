@@ -72,12 +72,12 @@ HANDLE IpcServer::CreatePipe() {
     auto name = string("\\\\.\\pipe\\") + this->pipeName;
     HANDLE hPipe = ::CreateNamedPipe(
                        name.c_str(),
-                       PIPE_ACCESS_INBOUND | FILE_FLAG_WRITE_THROUGH,
+                       PIPE_ACCESS_INBOUND,
                        PIPE_TYPE_MESSAGE | PIPE_READMODE_MESSAGE | PIPE_WAIT,
                        PIPE_UNLIMITED_INSTANCES,
                        this->outBufferSize,
                        this->inBufferSize,
-                       NMPWAIT_USE_DEFAULT_WAIT,
+                       NMPWAIT_WAIT_FOREVER,
                        &sa);
     if (hPipe == INVALID_HANDLE_VALUE) {
         return nullptr;
@@ -111,6 +111,7 @@ void IpcServer::Run() {
                 this->OnReceived(buffer, read);
             }
 
+            ::FlushFileBuffers(this->pipeHandle);
 			::DisconnectNamedPipe(this->pipeHandle);
         } else {}
 
